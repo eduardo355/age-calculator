@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.0/build/global/luxon.min.js"></script>
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    .container {
+        gap: 2rem;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .card {
+        gap: 10px;
+        width: 20rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    input {
+        height: 2.5rem;
+        cursor: pointer;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        border-radius: .3rem;
+        border: 2px solid black;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    button {
+        border: none;
+        color: white;
+        height: 2.5rem;
+        cursor: pointer;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        border-radius: .3rem;
+        font-size: 1rem;
+        background-color: rgb(58, 58, 58);
+    }
+
+    button:hover {
+        background-color: rgb(76, 76, 76);
+    }
+
+    span {
+        font-size: 1.2rem;
+    }
+</style>
+
+<body>
+
+    <main class="container">
+        <h1>Age Calculator</h1>
+        <form class="card">
+            <label for="">Enter your birth date:</label>
+            <input type="date">
+            <button type="submit">Calculate</button>
+        </form>
+        <span></span>
+    </main>
+
+    <script>
+        const { DateTime } = luxon;
+    
+        const form = document.querySelector('form');
+    
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const span = document.querySelector('span');
+            const input = document.querySelector('input');
+    
+            const birthDate = DateTime.fromISO(input.value);
+            const currentDate = DateTime.now();
+    
+            const age = currentDate.diff(birthDate, ['years', 'months']).toObject();
+    
+            span.innerHTML = `You are <b>${Math.floor(age.years)} years ${Math.floor(age.months)} months</b> old`;
+        });
+    </script>
+</body>
+
+</html>

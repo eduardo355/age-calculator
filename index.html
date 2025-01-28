@@ -83,11 +83,13 @@
         const { DateTime } = luxon;
     
         const form = document.querySelector('form');
+        const input = document.querySelector('input');
+
+        input.max = DateTime.now().toISODate();
     
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const span = document.querySelector('span');
-            const input = document.querySelector('input');
     
             const birthDate = DateTime.fromISO(input.value);
             const currentDate = DateTime.now();
